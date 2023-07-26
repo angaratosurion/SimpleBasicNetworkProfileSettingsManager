@@ -17,7 +17,7 @@ namespace SimpleBasicNetworkProfileSettingsManager
         public MainWindow()
         {
             InitializeComponent();
-            var lst = core.getAllintrfaces();
+            var lst = core.getAllinterfaces();
             core.CreateProfileFolder();
 
             if( lst != null )
@@ -171,7 +171,7 @@ namespace SimpleBasicNetworkProfileSettingsManager
                     cbxProfiles.Items.Add(profile);
                 }
             }
-            var iflst = core.getAllintrfaces();
+            var iflst = core.getAllinterfaces();
 
 
             if (iflst != null)

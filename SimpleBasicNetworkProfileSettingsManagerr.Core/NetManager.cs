@@ -6,6 +6,8 @@ using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics.X86;
 using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
+using System;
 
 namespace SimpleBasicNetworkProfileSettingsManager.Core
 {
@@ -41,7 +43,7 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
 				throw;
 			}
         }
-        public List<string> getAllintrfaces()
+        public List<string> getAllinterfaces()
         {
             try
             {

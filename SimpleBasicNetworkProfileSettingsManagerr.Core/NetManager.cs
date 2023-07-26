@@ -8,12 +8,16 @@ using System.Runtime.Intrinsics.X86;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 using System;
+using System.Reflection;
 
 namespace SimpleBasicNetworkProfileSettingsManager.Core
 {
     public class NetManager
     {
-
+        public string GetVersion()
+        {
+            return Assembly.GetExecutingAssembly().GetName().Version.ToString(); 
+        }
         public void SetProfile(Ip4Profile profile)
         {
             try

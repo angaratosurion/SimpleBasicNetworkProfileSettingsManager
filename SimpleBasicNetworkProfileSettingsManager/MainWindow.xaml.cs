@@ -28,6 +28,8 @@ namespace SimpleBasicNetworkProfileSettingsManager
 
                 }
             }
+            this.Title = String.Format("{0} - Version : {1} Kernel Version: {2}", Application.Current.MainWindow.GetType().Assembly.GetName().Name, 
+                Application.Current.MainWindow.GetType().Assembly.GetName().Version,core.GetVersion());
             //this.stpProfileSelection.Width = this.Width - this.stpButtons.Width;
             //this.stpButtons.HorizontalAlignment = HorizontalAlignment.Left;
         }

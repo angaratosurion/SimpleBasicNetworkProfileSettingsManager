@@ -18,7 +18,11 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <TabControl SelectionChanged="TabControl_SelectionChanged" x:Name="tbControl">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="203*"/>
+            <ColumnDefinition Width="597*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl SelectionChanged="TabControl_SelectionChanged" x:Name="tbControl" Grid.ColumnSpan="2">
             <TabItem Header="Active Network Settings">
                 <Grid Background="#FFE5E5E5" >
                     <StackPanel Orientation="Vertical"   >

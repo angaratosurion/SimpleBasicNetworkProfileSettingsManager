@@ -22,11 +22,14 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
         {
             try
             {
-                string commandstatic = String.Format("interface ip set address {0) static {1} {2} {3}",profile.ConnectionName
-                    ,profile.IPAddress,profile.Mask,profile.GateWay);
+                //string commandstatic = String.Format("interface ip set address {0) static {1} {2} {3}",profile.ConnectionName
+                //    ,profile.IPAddress,profile.Mask,profile.GateWay);
                 if (profile != null)
                 {
-                    string commanddhcp = String.Format("interface ip set address {0) dhcp", profile.ConnectionName);
+                    string commandstatic = "interface ip set address" + "\"" + profile.ConnectionName + "\"" + profile.IPAddress + " " +
+                         profile.Mask + " " + profile.GateWay +"  pause";
+
+                    string commanddhcp = "interface ip set address "+"\""+ profile.ConnectionName+"\" "+"dchp" ;
                     Process pr = new Process();
                     ProcessStartInfo inf;
                     if (profile.Static)

@@ -9,6 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 using System;
 using System.Reflection;
+using System.Text;
 
 namespace SimpleBasicNetworkProfileSettingsManager.Core
 {
@@ -26,10 +27,12 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
                 //    ,profile.IPAddress,profile.Mask,profile.GateWay);
                 if (profile != null)
                 {
-                    string commandstatic = "interface ip set address" + "\"" + profile.ConnectionName + "\"" + profile.IPAddress + " " +
-                         profile.Mask + " " + profile.GateWay +"  pause";
+                    var sb = new StringBuilder();
+                    string commandstatic = "interface ip set address " + "\"" + profile.ConnectionName + "\"  static " + profile.IPAddress 
+                        + " " +
+                          profile.Mask + " " + profile.GateWay;
 
-                    string commanddhcp = "interface ip set address "+"\""+ profile.ConnectionName+"\" "+"dchp" ;
+                    string commanddhcp = "interface ip set address "+"\""+ profile.ConnectionName+"\" "+" dhcp" ;
                     Process pr = new Process();
                     ProcessStartInfo inf;
                     if (profile.Static)
@@ -40,8 +43,25 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
                     {
                           inf = new ProcessStartInfo("netsh", commanddhcp);
                     }
+                  inf.RedirectStandardOutput = true;
+                    inf.RedirectStandardError = true;
+                    pr.OutputDataReceived += (sender, args) => sb.AppendLine(args.Data);
+                    pr.ErrorDataReceived += (sender, args) => sb.AppendLine(args.Data);
+                    inf.UseShellExecute= false;
+                    if (System.Environment.OSVersion.Version.Major >= 6)
+                    {
+                        inf.Verb = "runas";
+                    }
                     pr.StartInfo = inf;
+                    
+
                     pr.Start();
+                    pr.BeginOutputReadLine();
+                    pr.BeginErrorReadLine();
+
+                    // until we are done
+                    pr.WaitForExit();
+                    string output= sb.ToString();
                 }
 			}
 			catch (Exception)

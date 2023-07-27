@@ -30,9 +30,17 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
                     var sb = new StringBuilder();
                     string commandstatic = "interface ip set address " + "\"" + profile.ConnectionName + "\"  static " + profile.IPAddress 
                         + " " +
-                          profile.Mask + " " + profile.GateWay;
+                          profile.Mask + " " + profile.GateWay,dnsserversdhcpprim= "interface ip set dnsservers " + "\"" 
+                          + profile.ConnectionName + "\"  static "+profile.PrimaryDns +" primary",
+                          dnsserversstaticsec = "interface ip set dnsservers " + "\""
+                          + profile.ConnectionName + "\"  static " + profile.SecondaryDns + " secondary"; ;
 
-                    string commanddhcp = "interface ip set address "+"\""+ profile.ConnectionName+"\" "+" dhcp" ;
+
+                    string commanddhcp = "interface ip set address "+"\""+ profile.ConnectionName+"\" "+" dhcp",
+                        dnsserversdhcpcprim = "interface ip set dnsservers " + "\""
+                          + profile.ConnectionName + "\"  dhcp " + profile.PrimaryDns + " primary",
+                          dnsserversdhcpsec = "interface ip set dnsservers " + "\""
+                          + profile.ConnectionName + "\"  dhcp " + profile.SecondaryDns + " secondary"; ; ;
                     Process pr = new Process();
                     ProcessStartInfo inf;
                     if (profile.Static)
@@ -58,10 +66,52 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
                     pr.Start();
                     pr.BeginOutputReadLine();
                     pr.BeginErrorReadLine();
+                   
 
                     // until we are done
                     pr.WaitForExit();
                     string output= sb.ToString();
+                    if (profile.Static)
+                    {
+                        inf.Arguments = dnsserversdhcpprim;
+                        pr.Start();
+                        pr.BeginOutputReadLine();
+                        pr.BeginErrorReadLine();
+
+
+                        // until we are done
+                        pr.WaitForExit();
+
+                        inf.Arguments = dnsserversstaticsec;
+                        pr.Start();
+                        pr.BeginOutputReadLine();
+                        pr.BeginErrorReadLine();
+
+
+                        // until we are done
+                        pr.WaitForExit();
+                    }
+                    else
+                    {
+                        inf.Arguments = dnsserversdhcpprim;
+                        pr.Start();
+                        pr.BeginOutputReadLine();
+                        pr.BeginErrorReadLine();
+
+
+                        // until we are done
+                        pr.WaitForExit();
+
+                        inf.Arguments = dnsserversdhcpsec;
+                        pr.Start();
+                        pr.BeginOutputReadLine();
+                        pr.BeginErrorReadLine();
+
+
+                        // until we are done
+                        pr.WaitForExit();
+                    }
+                
                 }
 			}
 			catch (Exception)

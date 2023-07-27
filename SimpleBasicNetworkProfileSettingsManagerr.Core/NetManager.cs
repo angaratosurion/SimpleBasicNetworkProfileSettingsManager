@@ -75,8 +75,8 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
                     {
                         inf.Arguments = dnsserversdhcpprim;
                         pr.Start();
-                        pr.BeginOutputReadLine();
-                        pr.BeginErrorReadLine();
+                        //pr.BeginOutputReadLine();
+                        //pr.BeginErrorReadLine();
 
 
                         // until we are done
@@ -84,8 +84,8 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
 
                         inf.Arguments = dnsserversstaticsec;
                         pr.Start();
-                        pr.BeginOutputReadLine();
-                        pr.BeginErrorReadLine();
+                        //pr.BeginOutputReadLine();
+                        //pr.BeginErrorReadLine();
 
 
                         // until we are done
@@ -95,8 +95,8 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
                     {
                         inf.Arguments = dnsserversdhcpprim;
                         pr.Start();
-                        pr.BeginOutputReadLine();
-                        pr.BeginErrorReadLine();
+                        //pr.BeginOutputReadLine();
+                        //pr.BeginErrorReadLine();
 
 
                         // until we are done
@@ -104,8 +104,8 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
 
                         inf.Arguments = dnsserversdhcpsec;
                         pr.Start();
-                        pr.BeginOutputReadLine();
-                        pr.BeginErrorReadLine();
+                        //pr.BeginOutputReadLine();
+                        //pr.BeginErrorReadLine();
 
 
                         // until we are done

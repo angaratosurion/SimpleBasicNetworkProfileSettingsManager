@@ -145,7 +145,7 @@ namespace SimpleBasicNetworkProfileSettingsManager
             ip4Profile.Mask = (string)txtMask.Text;
             ip4Profile.IPAddress = (string)txtIpAddress.Text;
             ip4Profile.GateWay = (string)txtGateWay.Text;
-            ip4Profile.Static = (bool)chkStatic.IsChecked;
+            ip4Profile.Static = (bool)chkProfStatic.IsChecked;
             ip4Profile.PrimaryDns = txtPrimaryDNS.Text;
             ip4Profile.SecondaryDns =  txtSecondaryDNS.Text;
 

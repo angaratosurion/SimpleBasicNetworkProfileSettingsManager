@@ -82,14 +82,14 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
                         // until we are done
                         pr.WaitForExit();
 
-                        inf.Arguments = dnsserversstaticsec;
-                        pr.Start();
-                        //pr.BeginOutputReadLine();
-                        //pr.BeginErrorReadLine();
+                        //inf.Arguments = dnsserversstaticsec;
+                        //pr.Start();
+                        ////pr.BeginOutputReadLine();
+                        ////pr.BeginErrorReadLine();
 
 
-                        // until we are done
-                        pr.WaitForExit();
+                        //// until we are done
+                        //pr.WaitForExit();
                     }
                     else
                     {
@@ -102,14 +102,14 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
                         // until we are done
                         pr.WaitForExit();
 
-                        inf.Arguments = dnsserversdhcpsec;
-                        pr.Start();
-                        //pr.BeginOutputReadLine();
-                        //pr.BeginErrorReadLine();
+                        //inf.Arguments = dnsserversdhcpsec;
+                        //pr.Start();
+                        ////pr.BeginOutputReadLine();
+                        ////pr.BeginErrorReadLine();
 
 
-                        // until we are done
-                        pr.WaitForExit();
+                        //// until we are done
+                        //pr.WaitForExit();
                     }
                 
                 }

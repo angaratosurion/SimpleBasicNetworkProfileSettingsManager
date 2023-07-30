@@ -37,7 +37,7 @@ namespace SimpleBasicNetworkProfileSettingsManager
         private void cbxInterfaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var netinnf = core.GetNetworkInterface((string)cbxInterfaces.SelectedValue);
-            this.Title = (string)cbxInterfaces.SelectedValue;
+            //this.Title = (string)cbxInterfaces.SelectedValue;
             if( netinnf != null )
             {
 
@@ -48,10 +48,13 @@ namespace SimpleBasicNetworkProfileSettingsManager
                         lblIpAddress.Content=ip.Address.ToString();
                         lblMask.Content=ip.IPv4Mask.ToString();
                         lblGateWay.Content=netinnf.GetIPProperties().GatewayAddresses.FirstOrDefault()?.Address.ToString();
-                        lblPrimaryDNS.Content= netinnf.GetIPProperties().DnsAddresses[0].ToString();
-                        if (netinnf.GetIPProperties().DnsAddresses.Count > 1)
+                        if (netinnf.GetIPProperties().DnsAddresses != null && netinnf.GetIPProperties().DnsAddresses.Count==1)
                         {
-                            lblSecondaryDNS.Content = netinnf.GetIPProperties().DnsAddresses[1].ToString();
+                            lblPrimaryDNS.Content = netinnf.GetIPProperties().DnsAddresses[0].ToString();
+                            if (netinnf.GetIPProperties().DnsAddresses.Count > 1)
+                            {
+                                lblSecondaryDNS.Content = netinnf.GetIPProperties().DnsAddresses[1].ToString();
+                            }
                         }
                     }
                 }
@@ -146,7 +149,7 @@ namespace SimpleBasicNetworkProfileSettingsManager
             ip4Profile.IPAddress = (string)txtIpAddress.Text;
             ip4Profile.GateWay = (string)txtGateWay.Text;
             ip4Profile.Static = (bool)chkProfStatic.IsChecked;
-            ip4Profile.PrimaryDns = txtPrimaryDNS.Text;
+            ip4Profile.PrimaryDns = txtPrimaryDNS.Text;            
             ip4Profile.SecondaryDns =  txtSecondaryDNS.Text;
 
             core.SaveProfile(ip4Profile, (string)cbxProfiles.SelectedValue);

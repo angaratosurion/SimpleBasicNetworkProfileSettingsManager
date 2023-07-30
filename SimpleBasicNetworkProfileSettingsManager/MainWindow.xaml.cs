@@ -48,7 +48,8 @@ namespace SimpleBasicNetworkProfileSettingsManager
                         lblIpAddress.Content=ip.Address.ToString();
                         lblMask.Content=ip.IPv4Mask.ToString();
                         lblGateWay.Content=netinnf.GetIPProperties().GatewayAddresses.FirstOrDefault()?.Address.ToString();
-                        if (netinnf.GetIPProperties().DnsAddresses != null && netinnf.GetIPProperties().DnsAddresses.Count==1)
+                        if (netinnf.GetIPProperties().DnsAddresses != null &&  netinnf.GetIPProperties().DnsAddresses.Count>0 &&
+                            netinnf.GetIPProperties().DnsAddresses[0]!=null)
                         {
                             lblPrimaryDNS.Content = netinnf.GetIPProperties().DnsAddresses[0].ToString();
                             if (netinnf.GetIPProperties().DnsAddresses.Count > 1)

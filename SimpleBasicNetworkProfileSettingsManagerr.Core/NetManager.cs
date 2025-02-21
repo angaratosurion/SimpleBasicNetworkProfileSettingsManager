@@ -28,19 +28,21 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
                 if (profile != null)
                 {
                     var sb = new StringBuilder();
-                    string commandstatic = "interface ip set address " + "\"" + profile.ConnectionName + "\"  static " + profile.IPAddress 
+                    string commandstatic = "interface ipv4 set address " + "\"" + profile.ConnectionName + "\"  static " + profile.IPAddress 
                         + " " +
-                          profile.Mask + " " + profile.GateWay,dnsserversdhcpprim= "interface ip set dnsservers " + "\"" 
+                          profile.Mask + " " + profile.GateWay,dnsserversstaticprim= "interface ipv4 set dns " + 
+                          "\"" 
                           + profile.ConnectionName + "\"  static "+profile.PrimaryDns +" primary",
-                          dnsserversstaticsec = "interface ip set dnsservers " + "\""
-                          + profile.ConnectionName + "\"  static " + profile.SecondaryDns + " secondary"; ;
+                          dnsserversstaticsec = "interface ipv4 add dnsservers " + "\""
+                          + profile.ConnectionName + "" + profile.SecondaryDns + "index=2"; ;
 
 
-                    string commanddhcp = "interface ip set address "+"\""+ profile.ConnectionName+"\" "+" dhcp",
-                        dnsserversdhcpcprim = "interface ip set dnsservers " + "\""
+                    string commanddhcp = "interface ipv4 set address "+"\""+ profile.ConnectionName+"\" "+
+                        " dhcp",
+                        dnsserversdhcpcprim = "interface ipv4 set dns " + "\""
                           + profile.ConnectionName + "\"  dhcp " + profile.PrimaryDns + " primary",
-                          dnsserversdhcpsec = "interface ip set dnsservers " + "\""
-                          + profile.ConnectionName + "\"  dhcp " + profile.SecondaryDns + " secondary"; ; ;
+                          dnsserversdhcpsec = "interface ipv4 add dns " + "\""
+                          + profile.ConnectionName + "\"  dhcp" + profile.SecondaryDns + " index=2"; ; ;
                     Process pr = new Process();
                     ProcessStartInfo inf;
                     if (profile.Static)
@@ -73,7 +75,7 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
                     string output= sb.ToString();
                     if (profile.Static)
                     {
-                        inf.Arguments = dnsserversdhcpprim;
+                        inf.Arguments = dnsserversstaticprim;
                         pr.Start();
                         //pr.BeginOutputReadLine();
                         //pr.BeginErrorReadLine();
@@ -82,18 +84,18 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
                         // until we are done
                         pr.WaitForExit();
 
-                        //inf.Arguments = dnsserversstaticsec;
-                        //pr.Start();
+                        inf.Arguments = dnsserversstaticsec;
+                        pr.Start();
                         ////pr.BeginOutputReadLine();
                         ////pr.BeginErrorReadLine();
 
 
                         //// until we are done
-                        //pr.WaitForExit();
+                        pr.WaitForExit();
                     }
                     else
                     {
-                        inf.Arguments = dnsserversdhcpprim;
+                        inf.Arguments = dnsserversdhcpcprim;
                         pr.Start();
                         //pr.BeginOutputReadLine();
                         //pr.BeginErrorReadLine();
@@ -102,14 +104,14 @@ namespace SimpleBasicNetworkProfileSettingsManager.Core
                         // until we are done
                         pr.WaitForExit();
 
-                        //inf.Arguments = dnsserversdhcpsec;
-                        //pr.Start();
+                        inf.Arguments = dnsserversdhcpsec;
+                        pr.Start();
                         ////pr.BeginOutputReadLine();
                         ////pr.BeginErrorReadLine();
 
 
                         //// until we are done
-                        //pr.WaitForExit();
+                        pr.WaitForExit();
                     }
                 
                 }
